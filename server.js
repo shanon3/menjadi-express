@@ -73,8 +73,7 @@ app.get('/profile/detail/(:id)', async (req, res) => {
 app.put('/profile/update/(:id)', async (req, res) => {
     let statusCode = 200
     let message = "Update Person"
-    var person = await PersonModel.findByIdAndUpdate(req.params.id. 
-        req.body, {new: true});
+    var person = await PersonModel.findByIdAndUpdate(req.params.id,req.body, {new: true});
     const response = {
         statusCode: 200,
         error: message,

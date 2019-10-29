@@ -21,8 +21,22 @@ const PersonModel = Mongoose.model("person", {
 app.post('/profile/create', async(req, res) => {
     //Do something here
     console.log(req.body)
-    var person = new PersonModel(req.body);
-    var result = await person.save();
+    if(!req.body.firstname){
+        res.status(400).json({
+            statusCode: 400,
+            error: "firstname parameter is required",
+            message: "firstname parameter is required"
+        });
+    }
+    if(!req.body.lastname){
+        res.status(400).json({
+            statusCode: 400,
+            error: "lastname parameter is required",
+            message: "lastname parameter is required"
+        });
+    }
+    // var person = new PersonModel(req.body);
+    // var result = await person.save();
     const insert = {
         firstname: req.body.firstname,
         lastname: req.body.lastname
@@ -86,9 +100,17 @@ app.put('/profile/update/(:id)', async (req, res) => {
 //delete data method get
 //url http://localhost:3000/profile/delete/id
 app.get('/profile/delete/(:id)', async (req, res) => {
+    const checkId = Mongoose.Types.ObjectId.isValid(req.params.id)
+    //check dataObject id valid jika valid lakukan eksekusi delete
     let statusCode = 200
     let message = "Delete Person"
-    var person = await PersonModel.findByIdAndDelete(req.params.id).exec();
+    if(checkId){ //jika id valid, delete data
+        var person = await PersonModel.findByIdAndDelete(req.params.id).exec();
+    }else{
+        statusCode = 404,
+        message = "Object Id invalid"
+        var person = null
+    }
     const response = {
         statusCode: statusCode,
         error: message,

@@ -27,29 +27,27 @@ app.post('/profile/create', async(req, res) => {
             error: "firstname parameter is required",
             message: "firstname parameter is required"
         });
-    }
-    if(!req.body.lastname){
+    }else if(!req.body.lastname){
         res.status(400).json({
             statusCode: 400,
             error: "lastname parameter is required",
             message: "lastname parameter is required"
         });
+    } else{
+        const insert = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname
+        }
+        var person = new PersonModel(insert);
+        var result = await person.save();
+        const response = {
+            statusCode: 200,
+            error: "",
+            message: "create Person",
+            content: result
+        }
+        res.json(response);
     }
-    // var person = new PersonModel(req.body);
-    // var result = await person.save();
-    const insert = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname
-    }
-    var person = new PersonModel(insert);
-    var result = await person.save();
-    const response = {
-        statusCode: 200,
-        error: "",
-        message: "create Person",
-        content: result
-    }
-    res.json(response);
 })
 
 //url http://localhost:3000/profile/list

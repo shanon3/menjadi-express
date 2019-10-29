@@ -9,6 +9,10 @@ app.use(bodyParser.json()); //menangkap url dalam bentuk json
 
 //commit dengan message "config body parser"
 
+
+// commit -m "memanggil MongoConfig dan membuat model PersonModel sebagai 
+// penampung collections person"
+
 //membuat request post
 app.post('/hello', function(req, res){
     const respon = {

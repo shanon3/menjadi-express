@@ -75,7 +75,22 @@ app.put('/profile/update/(:id)', async (req, res) => {
     let message = "Update Person"
     var person = await PersonModel.findByIdAndUpdate(req.params.id,req.body, {new: true});
     const response = {
-        statusCode: 200,
+        statusCode: statusCode,
+        error: message,
+        message: message,
+        content: person
+    }
+    res.status(statusCode).json(response);
+})
+
+//delete data method get
+//url http://localhost:3000/profile/delete/id
+app.get('/profile/delete/(:id)', async (req, res) => {
+    let statusCode = 200
+    let message = "Delete Person"
+    var person = await PersonModel.findByIdAndDelete(req.params.id).exec();
+    const response = {
+        statusCode: statusCode,
         error: message,
         message: message,
         content: person

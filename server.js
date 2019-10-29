@@ -18,6 +18,26 @@ const PersonModel = Mongoose.model("person", {
 // commit -m "memanggil MongoConfig dan membuat model PersonModel sebagai 
 // penampung collections person"
 
+app.post('/profile/create', async(req, res) => {
+    //Do something here
+    console.log(req.body)
+    var person = new PersonModel(req.body);
+    var result = await person.save();
+    const insert = {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname
+    }
+    var person = new PersonModel(insert);
+    var result = await person.save();
+    const response = {
+        statusCode: 200,
+        error: "",
+        message: "create Person",
+        content: result
+    }
+    res.json(response);
+})
+
 //membuat request post
 app.post('/hello', function(req, res){
     const respon = {

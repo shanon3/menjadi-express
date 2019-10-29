@@ -54,7 +54,7 @@ app.get('/profile/list', async (req, res) => {
 
 //detail profile data method get
 //http://localhost:3000/profile/detail/idmongo
-app.get('./profile/detail/(:id)', async (req, res) => {
+app.get('/profile/detail/(:id)', async (req, res) => {
     let statusCode = 200
     let message = "Detail Person"
     var person = await PersonModel.findById(req.params.id).exec();
@@ -67,6 +67,22 @@ app.get('./profile/detail/(:id)', async (req, res) => {
 })
 
 //commit -m "create post profile mongo"
+
+//update data profile menggunakan method put
+//url http://localhost:3000/profile/update/idmongo
+app.put('/profile/update/(:id)', async (req, res) => {
+    let statusCode = 200
+    let message = "Update Person"
+    var person = await PersonModel.findByIdAndUpdate(req.params.id. 
+        req.body, {new: true});
+    const response = {
+        statusCode: 200,
+        error: message,
+        message: message,
+        content: person
+    }
+    res.status(statusCode).json(response);
+})
 
 //membuat request post
 app.post('/hello', function(req, res){

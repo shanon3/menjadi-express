@@ -20,9 +20,5 @@ app.post('/hello', function(req, res){
     res.json(respon);
 })
 
-<<<<<<< HEAD
-//commit lagi dengan message "membuat request post"
-=======
->>>>>>> 64bafd9221cc8ee99f27da66950eb49415f21aaa
 app.listen(port, () => console.log(`Example app listening on port ${port}`))
 

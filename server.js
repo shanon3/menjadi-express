@@ -38,6 +38,22 @@ app.post('/profile/create', async(req, res) => {
     res.json(response);
 })
 
+//url http://localhost:3000/profile/list
+app.get('/profile/list', async (req, res) => {
+    //Do something here
+    var person = await PersonModel.find().exec();
+    const response = {
+        statusCode: 200,
+        error: "",
+        message: "create Person",
+        content: person
+    }
+    res.json(response);
+})
+//commit -m "menampilkan semua data"
+
+//commit -m "create post profile mongo"
+
 //membuat request post
 app.post('/hello', function(req, res){
     const respon = {

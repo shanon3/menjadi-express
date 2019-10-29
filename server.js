@@ -129,5 +129,9 @@ app.post('/hello', function(req, res){
     res.json(respon);
 })
 
+//membuat route
+var todoRoute = require('./routes/todoRoutes');
+app.use('/todo', todoRoute);
+
 app.listen(port, () => console.log(`Example app listening on port ${port}`))
 

@@ -52,6 +52,20 @@ app.get('/profile/list', async (req, res) => {
 })
 //commit -m "menampilkan semua data"
 
+//detail profile data method get
+//http://localhost:3000/profile/detail/idmongo
+app.get('./profile/detail/(:id)', async (req, res) => {
+    let statusCode = 200
+    let message = "Detail Person"
+    var person = await PersonModel.findById(req.params.id).exec();
+    const response = {
+        statusCode: 200,
+        error: message,
+        content: person
+    }
+    res.status(statusCode).json(response);
+})
+
 //commit -m "create post profile mongo"
 
 //membuat request post

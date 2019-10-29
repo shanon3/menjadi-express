@@ -9,6 +9,11 @@ app.use(bodyParser.json()); //menangkap url dalam bentuk json
 
 //commit dengan message "config body parser"
 
+const Mongoose = require('./MongoModel/MongoConfig') //koneksi ke file MongoConfig
+const PersonModel = Mongoose.model("person", {
+    firstname: String, // field firstname
+    lastname: String // field lastname
+})
 
 // commit -m "memanggil MongoConfig dan membuat model PersonModel sebagai 
 // penampung collections person"
